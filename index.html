@@ -10,21 +10,17 @@
 <body>
 <header>CRUD en JAVASCRIPT</header>
     <article>Este es una web con la funcionalidad de agregar una tarea y su respectiva descripcion, pudiendo editar y borrar las que han sido ingresadas.</article>
-    <form id="form">
+    <form id="formulario">
     <label>Tarea:</label><br>
     <input type="text" id="taskname" placeholder="Nombre de la tarea..." class="css-input"  maxlength="15">
     <br><br>
     <label>Descripcion:</label><br>
     <input type="text" id="description" placeholder="Descripcion de la tarea..." class="css-input"  maxlength="25"> 
     <br><br>
-    <button type="submit" style="margin-left:2rem">Agregar</button>
+    <button type="submit" style="margin-left:2rem" id="btnAgregar">Agregar tarea</button>
   </form>
-   <div id="lista"><h3>Todo List:</h3><br>
-    <li>Coffee -  Descripcion: correr saltar bla bla</li><button  id="btn-editar">Editar</button><button id="btn-borrar">Borrar</button>
-    <li>Tea - Descripcion: correr saltar bla bla</li> <button  id="btn-editar">Editar</button><button id="btn-borrar">Borrar</button>
-    <li>Coca Cola  - Descripcion: correr saltar bla bla</li> <button  id="btn-editar">Editar</button><button id="btn-borrar">Borrar</button>
-   
-</div>
+  <h3>Todo List:</h3>
+   <div id="lista"></div>
 <footer><br> Concepción CHILE - 2022<br><br></footer>
 </body>
 </html>
