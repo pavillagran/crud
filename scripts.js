@@ -4,7 +4,6 @@ const listaTareasUI = document.querySelector('#lista');
 
 let arrayLista = [];   // array vacio
 
-
 //FUNCIONES
 const CrearItem = (actividad) => {
   let item ={
