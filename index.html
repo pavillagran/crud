@@ -6,79 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title> CRUD en  javascript</title>
       <link rel="stylesheet" href="styles.css">
-      <!-- <script src="./scripts.js"></script> -->
+     
   </head>
   <body>
 
   <header>CRUD en JAVASCRIPT</header>
-      <article>Esta es una web con la funcionalidad de agregar una tarea y su respectiva descripción, pudiendo editar y borrar las tareas que han sido ingresadas .</article>
-      <br><br>
-      <form id="formulario">
-      <label>Tarea:</label><br>
-      <input type="text" id="actividad" placeholder="Nombre de la tarea..." class="css-input"  maxlength="15">
-      <br><br>
-      <label>Descripcion:</label><br>
-      <input type="text" id="description" placeholder="Descripción de la tarea..." class="css-input"  maxlength="25"> 
-      <br><br>
-      <button type="submit" style="margin-left:2rem" id="btnAgregar">Agregar tarea</button>
+
+  <article>Esta es una web con la funcionalidad de agregar una tarea y su respectiva descripción, pudiendo editar y borrar las tareas que han sido ingresadas .</article>
+  <br><br>
+
+    <form id="formulario">
+      <label for="actividad">Actividad:</label>
+      <input type="text" id="actividad" name="actividad" required>
+      <br>
+      <label for="descripcion">Descripción:</label>
+      <input type="text" id="descripcion" name="descripcion" required>
+      <br>
+      <button type="submit">Agregar tarea</button>
+      
     </form>
+
+    
     <h3 style="text-align: center">Todo List:</h3>
      <div id="lista"></div>
-<script>
+     <script src="script.js"></script> 
 
-// VARIABLES
-const formularioUI = document.querySelector('#formulario');
-const listaTareasUI = document.querySelector('#lista');
-
-let arrayLista = [];   // array vacio
-
-
-//FUNCIONES
-const CrearItem = (actividad) => {
-  let item ={
-  actividad: actividad,
-  descripcion: description,
-  estado: false
-}
-
-arrayLista.push(item);
-//console.log(arrayLista)
-return item;
-}
-
-// guardar db
-const GuardarDB = () => {
-  localStorage.setItem('tarea', JSON.stringify(arrayLista));
-  PintarDB();
-}
-
-const PintarDB  = () =>{
-  listaTareasUI.innerHTML = '';
-  arrayLista = JSON.parse(localStorage.getItem('tarea'));
-  // console.log(arrayLista);
-  if(arrayLista === null){
-    arrayLista = [];    // se vacia si esta nulo
-  }else{
-    arrayLista.forEach(element => {
-      //console.log(element);  ver si es persistente
-      listaTareasUI.innerHTML +=    `<li>${element.actividad} ${element.descripcion}  </li><button  id="btn-editar">Editar</button><button id="btn-borrar">Eliminar</button>`
-    });
-  }
-}
-//EVENT LISTENERS 
-formularioUI.addEventListener('submit', (e) => {
-  e.preventDefault();
-  let actividadUI = document.querySelector('#actividad').value;
-  console.log(actividadUI);
- 
-  CrearItem(actividadUI); 
-  GuardarDB();          
-  formularioUI.reset();            // resetea el formulario cada vez que apreta el btn
-});
-
-document.addEventListener('DOMContentLoaded', PintarDB)
-
-</script>
 <footer><br> Concepción CHILE - 2022<br><br></footer>
 </body>
 </html>
