@@ -6,7 +6,7 @@ let arrayLista = [];   // array vacio
 
 
 //FUNCIONES
-const CrearItem = (actividad, descripcion) => {   // CREA EL OBJETO Y LO CARGA AL ARRAY
+const crearItem = (actividad, descripcion) => {   // CREA EL OBJETO Y LO CARGA AL ARRAY
   let item ={
     id: Date.now(),   // se genera un ID único usando la fecha actual
     actividad: actividad,
@@ -21,12 +21,12 @@ const CrearItem = (actividad, descripcion) => {   // CREA EL OBJETO Y LO CARGA A
 }
 
 // guardar db
-const GuardarDB = () => {
+const guardarDB = () => {
   localStorage.setItem('tarea', JSON.stringify(arrayLista));
-  PintarDB();
+  pintarDB();
 }
 
-const PintarDB  = () =>{
+const pintarDB  = () =>{
   listaTareasUI.innerHTML = '';
 
   arrayLista = JSON.parse(localStorage.getItem('tarea'));
@@ -35,9 +35,9 @@ const PintarDB  = () =>{
     arrayLista = [];    // se vacia si esta nulo
   }else{
     arrayLista.forEach(element => {
-      listaTareasUI.innerHTML += `<li id="${element.id}"><b>${element.actividad} </b><br> ${element.descripcion}  </li><button class="btn-editar" data-id="${element.id}">Editar</button><button class="btn-borrar" data-id="${element.id}">Eliminar</button>`;
+      listaTareasUI.innerHTML += `<li id="${element.id}"><b>${element.actividad} </b><br> ${element.descripcion}  </li><button class="btn-editar" data-id="${element.id}">Editar</button><button class="btn-borrar" data-id="${element.id}">Eliminar</button><br><br>`;
     });
- //LISTENERS
+
 
     // Agrega el evento "click" a cada botón "Editar"
     listaTareasUI.querySelectorAll('.btn-editar').forEach(boton => {
@@ -46,6 +46,7 @@ const PintarDB  = () =>{
         const li = document.querySelector(`li[id="${id}"]`);
         const actividadUI = li.querySelector('b').textContent;
         const descripcionUI = li.textContent.trim().replace(actividadUI, '');
+
         //INGRESA DATOS MODIFICADOS CON PROMPT
         const nuevaActividad = prompt('Ingrese la nueva actividad:', actividadUI);
         const nuevaDescripcion = prompt('Ingrese la nueva descripción:', descripcionUI);
@@ -57,7 +58,7 @@ const PintarDB  = () =>{
           arrayLista[index].descripcion = nuevaDescripcion;
 
           // Guarda el array actualizado en el localStorage
-          GuardarDB();
+          guardarDB();
         }
       });
     });
@@ -71,21 +72,21 @@ const PintarDB  = () =>{
         arrayLista = arrayLista.filter(item => item.id !== parseInt(id));
 
         // Guarda el array actualizado en el localStorage
-        GuardarDB();
+        guardarDB();
       });
     });
   }
 }
 
 
-//EVENT LISTENERS 
+//EVENT LISTENER
 formularioUI.addEventListener('submit', (e) => {
   e.preventDefault();
   let actividadUI = document.querySelector('#actividad').value;
   let descripcionUI = document.querySelector('#descripcion').value;
-  CrearItem(actividadUI, descripcionUI); 
-  GuardarDB();          
+  crearItem(actividadUI, descripcionUI); 
+  guardarDB();          
   formularioUI.reset();            // resetea el formulario cada vez que apreta el btn
 });
 
-document.addEventListener('DOMContentLoaded', PintarDB);
+document.addEventListener('DOMContentLoaded', pintarDB);
